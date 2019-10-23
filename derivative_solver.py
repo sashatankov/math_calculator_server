@@ -1,12 +1,16 @@
 import re
 from CompilationError import *
 from enum import Enum
+import derivatives
 
 COEFF = 0
 FUNCTION_TYPE = 1
 DEGREE = 2
 INNER_FUNCTION = 3
 BASE = 2
+FIRST = 0
+SECOND = 1
+
 
 class Function(Enum):
     POLY = 5
@@ -156,8 +160,26 @@ class DerivativeSolver:
     @staticmethod
     def _differentiate(term):
         # term is a 4-tuple
-        pass
+        if term[FUNCTION_TYPE] == Function.MULT:
+            first_term_der = DerivativeSolver._differentiate(term[INNER_FUNCTION][FIRST])
+            second_term_der = DerivativeSolver._differentiate(term[INNER_FUNCTION][SECOND])
+            res_first_term = (1, Function.MULT, 1, [first_term_der, term[INNER_FUNCTION][SECOND]])
+            res_second_term = (1, Function.MULT, 1, [second_term_der, term[INNER_FUNCTION][FIRST]])
+            return [res_first_term, res_second_term]
 
+        elif term[FUNCTION_TYPE] == Function.DIV:
+            first_term_der = DerivativeSolver._differentiate(term[INNER_FUNCTION][FIRST])
+            second_term_der = DerivativeSolver._differentiate(term[INNER_FUNCTION][SECOND])
+            res_first_term = (1, Function.MULT, 1, [first_term_der, term[INNER_FUNCTION][SECOND]])
+            res_second_term = (-1, Function.MULT, 1, [second_term_der, term[INNER_FUNCTION][FIRST]])
+            denominator_term = (1, Function.POLY, 2, term[INNER_FUNCTION][SECOND])
+            nominator_term = [res_first_term, res_second_term]
+            return 1, Function.DIV, 1, [nominator_term, denominator_term]
+
+        else:  # chain rule
+            outer_function_der = derivatives.derivatives[term[FUNCTION_TYPE]](term)
+            inner_function_der = DerivativeSolver._differentiate(term[INNER_FUNCTION])
+            return 1, Function.MULT, 1, [outer_function_der, inner_function_der]
 
     def _group_elements(self):
         pass
