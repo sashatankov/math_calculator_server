@@ -18,7 +18,7 @@ sin_pattern = re.compile("(-)?(\d+(\.\d+)?)?sin\(.+\)")  # f(x) = c*sin(g(x)) fu
 cos_pattern = re.compile("(-)?(\d+(\.\d+)?)?cos\(.+\)")  # f(x) = c*cos(g(x)) function pattern
 tan_pattern = re.compile("(-)?(\d+(\.\d+)?)?tan\(.+\)")  # f(x) = c*tan(g(x)) function pattern
 ln_pattern = re.compile("(-)?(\d+(\.\d+)?)?(ln|log)\(.+\)")  # f(x) = c*ln(g(x)) function pattern
-exp_pattern = re.compile("(-)?(\d+(\.\d+)?)?\*(-)?(\d+(\.\d+)?)?\^\(.+\)")  # f(x) = c*a^(g(x))
+exp_pattern = re.compile("(-)?(\d+(\.\d+)?)?\*(-)?((\d+(\.\d+)?)|e)\^\(.+\)")  # f(x) = c*a^(g(x))
 sqrt_pattern = re.compile("(-)?(\d+(\.\d+)?)?sqrt\(.+\)")  # f(x) = c*sqrt(g(x))
 
 
@@ -32,7 +32,7 @@ class DerivativeSolver:
         self._compile_exression()
 
     def derivative(self):
-        return DerivativeSolver._to_string(self._differentiated_elements)
+        return DerivativeSolver._print_expression(self._differentiated_elements)
 
 
 # some private methods
@@ -166,8 +166,8 @@ class DerivativeSolver:
             outer_function_der = derivatives[term[FUNCTION_TYPE]](term)
             if term[INNER_FUNCTION] is not None:
                 inner_function_der = list()
-                for term in term[INNER_FUNCTION]:
-                    inner_function_der.append(DerivativeSolver._differentiate(term[INNER_FUNCTION]))
+                for item in term[INNER_FUNCTION]:
+                    inner_function_der.append(DerivativeSolver._differentiate(item))
                 return 1, Function.MULT, 1, [outer_function_der, inner_function_der]
             return outer_function_der
 
@@ -182,63 +182,76 @@ class DerivativeSolver:
                 elif outer[FUNCTION_TYPE] == Function.POLY and outer[DEGREE] == 0:
                     terms[i] = (inner[COEFF] * outer[COEFF], inner[FUNCTION_TYPE], inner[DEGREE], inner[INNER_FUNCTION])
 
+
     @staticmethod
-    def _to_string(terms):
+    def _print_expression(terms):
         text = str()
         for i, term in enumerate(terms):
-            if term[COEFF] == -1:
-                text += "-"
-            elif term[COEFF] == 0:
-                continue
-            elif term[COEFF] != 1:
-                if term[COEFF] > 0:
-                    text += "+"
-                text += str(term[COEFF])
-
-            if term[FUNCTION_TYPE] == Function.MULT:
-                outer, inner = term[INNER_FUNCTION]
-                if inner[FUNCTION_TYPE] == Function.POLY: # TODO bug here to fix
-                    text += "(" + DerivativeSolver._to_string(inner) + ")" + DerivativeSolver._to_string(outer)
-                else:
-                    text += DerivativeSolver._to_string(inner) + DerivativeSolver._to_string(outer)
-            elif term[FUNCTION_TYPE] == Function.DIV:
-                nominator, denominator = term[INNER_FUNCTION]
-                if nominator[FUNCTION_TYPE] == Function.POLY:
-                    text += "(" + DerivativeSolver._to_string(nominator) + ")"
-                else:  # no need for parentheses for non-polynomial function
-                    text += DerivativeSolver._to_string(nominator)
-                text += "/"
-                if denominator[FUNCTION_TYPE] == Function.POLY:
-                    text += "(" + DerivativeSolver._to_string(denominator) + ")"
-                else:  # no need for parentheses for non-polynomial function
-                    text += DerivativeSolver._to_string(denominator)
-            elif term[FUNCTION_TYPE] == Function.POLY:
-                if term[INNER_FUNCTION] is None:
-                    if term[DEGREE] > 0:
-                        text += "x"
-                    if term[DEGREE] > 1:
-                        text += "^" + str(term[DEGREE])
-                else:
-                    if term[DEGREE] > 0:
-                        text += "(" + DerivativeSolver._to_string(term[INNER_FUNCTION]) + ")"
-                    if term[DEGREE] > 1:
-                        text += "^" + str(term[DEGREE])
-            elif term[FUNCTION_TYPE] == Function.SIN:
-                text += "sin(" + DerivativeSolver._to_string(term[INNER_FUNCTION]) + ")"
-            elif term[FUNCTION_TYPE] == Function.COS:
-                text += "cos(" + DerivativeSolver._to_string(term[INNER_FUNCTION]) + ")"
-            elif term[FUNCTION_TYPE] == Function.TAN:
-                text += "tan(" + DerivativeSolver._to_string(term[INNER_FUNCTION]) + ")"
-            elif term[FUNCTION_TYPE] == Function.EXP:
-                if term[COEFF] != 1:
-                    text += "*"
-                text += "e^(" + str(term[INNER_FUNCTION]) + ")"
-            elif term[FUNCTION_TYPE] == Function.LOG:
-                text += "log(" + DerivativeSolver._to_string(term[INNER_FUNCTION]) + ")"
-            elif term[FUNCTION_TYPE] == Function.SQRT:
-                text += "\u221A" + "(" + DerivativeSolver._to_string(term[INNER_FUNCTION]) + ")"
+            text += DerivativeSolver._print_term(term)
         return text
 
+    @staticmethod
+    def _print_term(term):
+        text = str()
+        if term[COEFF] == -1:
+            text += "-"
+        elif term[COEFF] == 0:
+            return text
+        elif term[COEFF] != 1:
+            if term[COEFF] > 0:
+                text += "+"
+            text += str(term[COEFF])
+
+        if term[FUNCTION_TYPE] == Function.MULT:
+            outer, inner = term[INNER_FUNCTION]
+            if len(inner) > 1:  # case where there's more than one term in the inner function
+                text += "(" + DerivativeSolver._print_expression(inner) + ")"
+            else:
+                text += DerivativeSolver._print_expression(inner)
+
+            if type(outer) is tuple:
+                text += DerivativeSolver._print_term(outer)
+            else:  # outer is a list
+                text += DerivativeSolver._print_expression(outer)
+
+        elif term[FUNCTION_TYPE] == Function.DIV:
+            nominator, denominator = term[INNER_FUNCTION]
+            if len(nominator) > 1:  # the case where there's more than one term in the nominator
+                text += "(" + DerivativeSolver._print_expression(nominator) + ")"
+            else:  # no need for parentheses for non-polynomial function
+                text += DerivativeSolver._print_term(nominator)
+            text += "/"
+            if len(denominator) > 1:  # the case where there's more than one term in the denominator
+                text += "(" + DerivativeSolver._print_expression(denominator) + ")"
+            else:  # no need for parentheses for non-polynomial function
+                text += DerivativeSolver._print_expression(denominator)
+        elif term[FUNCTION_TYPE] == Function.POLY:
+            if term[INNER_FUNCTION] is None:
+                if term[DEGREE] > 0:
+                    text += "x"
+                if term[DEGREE] > 1:
+                    text += "^" + str(term[DEGREE])
+            else:
+                if term[DEGREE] > 0:
+                    text += "(" + DerivativeSolver._print_expression(term[INNER_FUNCTION]) + ")"
+                if term[DEGREE] > 1:
+                    text += "^" + str(term[DEGREE])
+        elif term[FUNCTION_TYPE] == Function.SIN:
+            text += "sin(" + DerivativeSolver._print_expression(term[INNER_FUNCTION]) + ")"
+        elif term[FUNCTION_TYPE] == Function.COS:
+            text += "cos(" + DerivativeSolver._print_expression(term[INNER_FUNCTION]) + ")"
+        elif term[FUNCTION_TYPE] == Function.TAN:
+            text += "tan(" + DerivativeSolver._print_expression(term[INNER_FUNCTION]) + ")"
+        elif term[FUNCTION_TYPE] == Function.EXP:
+            if term[COEFF] != 1:
+                text += "*"
+            text += "e^(" + DerivativeSolver._print_expression(term[INNER_FUNCTION]) + ")"
+        elif term[FUNCTION_TYPE] == Function.LOG:
+            text += "log(" + DerivativeSolver._print_expression(term[INNER_FUNCTION]) + ")"
+        elif term[FUNCTION_TYPE] == Function.SQRT:
+            text += "\u221A" + "(" + DerivativeSolver._print_expression(term[INNER_FUNCTION]) + ")"  # sqrt sign in octal
+
+        return text
 
     @staticmethod
     def _pad_with_pluses(expression):

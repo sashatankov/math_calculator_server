@@ -4,7 +4,6 @@
     <list default="true" id="3e859a1e-95b9-4189-a287-f028d66e65ec" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/derivative_solver.py" afterPath="$PROJECT_DIR$/derivative_solver.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/derivatives.py" afterPath="$PROJECT_DIR$/derivatives.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.py" afterPath="$PROJECT_DIR$/test.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,14 +15,14 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/math_calculator_server$math_calculator_server.coverage" NAME="math_calculator_server Coverage Results" MODIFIED="1572254014858" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/math_calculator_server$test.coverage" NAME="test Coverage Results" MODIFIED="1572256392016" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/math_calculator_server$test.coverage" NAME="test Coverage Results" MODIFIED="1572276251325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="server.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
+            <state relative-caret-position="2112">
               <caret line="54" column="40" lean-forward="false" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
@@ -32,24 +31,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="derivative_solver.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="derivative_solver.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/derivative_solver.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="199" column="34" lean-forward="false" selection-start-line="199" selection-start-column="34" selection-end-line="199" selection-end-column="34" />
+            <state relative-caret-position="184">
+              <caret line="34" column="50" lean-forward="false" selection-start-line="34" selection-start-column="50" selection-end-line="34" selection-end-column="50" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-                <element signature="e#3123#3313#0" expanded="false" />
-                <element signature="e#3376#3467#0" expanded="false" />
-                <element signature="e#3530#3621#0" expanded="false" />
-                <element signature="e#3684#3775#0" expanded="false" />
-                <element signature="e#3837#3928#0" expanded="false" />
-                <element signature="e#3992#4084#0" expanded="false" />
-                <element signature="e#4147#4996#0" expanded="false" />
-                <element signature="e#5071#5196#0" expanded="false" />
-                <element signature="e#5280#6231#0" expanded="false" />
-                <element signature="e#11870#11986#0" expanded="false" />
-                <element signature="e#12368#12572#0" expanded="false" />
+                <element signature="e#3130#3320#0" expanded="false" />
+                <element signature="e#3383#3474#0" expanded="false" />
+                <element signature="e#3537#3628#0" expanded="false" />
+                <element signature="e#3691#3782#0" expanded="false" />
+                <element signature="e#3844#3935#0" expanded="false" />
+                <element signature="e#3999#4091#0" expanded="false" />
+                <element signature="e#4154#5003#0" expanded="false" />
+                <element signature="e#5078#5203#0" expanded="false" />
+                <element signature="e#5287#6238#0" expanded="false" />
+                <element signature="e#12753#12957#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -58,7 +56,7 @@
       <file leaf-file-name="derivatives.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/derivatives.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
+            <state relative-caret-position="1056">
               <caret line="25" column="36" lean-forward="false" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
               <folding>
                 <element signature="e#1#12#0" expanded="true" />
@@ -81,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="test.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+            <state relative-caret-position="616">
+              <caret line="30" column="19" lean-forward="false" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
                 <element signature="e#162#253#0" expanded="false" />
@@ -140,7 +138,7 @@
       <file leaf-file-name="Lex.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lex.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
+            <state relative-caret-position="3124">
               <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
               <folding />
             </state>
@@ -169,9 +167,9 @@
         <option value="$PROJECT_DIR$/server.py" />
         <option value="$PROJECT_DIR$/Lex.py" />
         <option value="$PROJECT_DIR$/equation_solver.py" />
-        <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/derivatives.py" />
         <option value="$PROJECT_DIR$/derivative_solver.py" />
+        <option value="$PROJECT_DIR$/test.py" />
       </list>
     </option>
   </component>
@@ -299,17 +297,17 @@
     <frame x="-1" y="-4" width="1922" height="1085" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13553895" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13713981" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20837696" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4251309" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4251309" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3790576" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2827225" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39895287" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36544502" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -346,13 +344,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/derivative_solver.py</url>
-          <line>41</line>
-          <option name="timeStamp" value="8" />
+          <line>148</line>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/derivative_solver.py</url>
-          <line>169</line>
-          <option name="timeStamp" value="9" />
+          <line>34</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -362,7 +360,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="10" />
+      <option name="time" value="12" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -402,17 +400,16 @@
           <caret line="22" column="31" lean-forward="false" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#3123#3313#0" expanded="false" />
-            <element signature="e#3376#3467#0" expanded="false" />
-            <element signature="e#3530#3621#0" expanded="false" />
-            <element signature="e#3684#3775#0" expanded="false" />
-            <element signature="e#3837#3928#0" expanded="false" />
-            <element signature="e#3992#4084#0" expanded="false" />
-            <element signature="e#4147#4996#0" expanded="false" />
-            <element signature="e#5071#5196#0" expanded="false" />
-            <element signature="e#5280#6231#0" expanded="false" />
-            <element signature="e#11870#11986#0" expanded="false" />
-            <element signature="e#12368#12572#0" expanded="false" />
+            <element signature="e#3130#3320#0" expanded="false" />
+            <element signature="e#3383#3474#0" expanded="false" />
+            <element signature="e#3537#3628#0" expanded="false" />
+            <element signature="e#3691#3782#0" expanded="false" />
+            <element signature="e#3844#3935#0" expanded="false" />
+            <element signature="e#3999#4091#0" expanded="false" />
+            <element signature="e#4154#5003#0" expanded="false" />
+            <element signature="e#5078#5203#0" expanded="false" />
+            <element signature="e#5287#6238#0" expanded="false" />
+            <element signature="e#12753#12957#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -501,17 +498,16 @@
           <caret line="22" column="31" lean-forward="false" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#3123#3313#0" expanded="false" />
-            <element signature="e#3376#3467#0" expanded="false" />
-            <element signature="e#3530#3621#0" expanded="false" />
-            <element signature="e#3684#3775#0" expanded="false" />
-            <element signature="e#3837#3928#0" expanded="false" />
-            <element signature="e#3992#4084#0" expanded="false" />
-            <element signature="e#4147#4996#0" expanded="false" />
-            <element signature="e#5071#5196#0" expanded="false" />
-            <element signature="e#5280#6231#0" expanded="false" />
-            <element signature="e#11870#11986#0" expanded="false" />
-            <element signature="e#12368#12572#0" expanded="false" />
+            <element signature="e#3130#3320#0" expanded="false" />
+            <element signature="e#3383#3474#0" expanded="false" />
+            <element signature="e#3537#3628#0" expanded="false" />
+            <element signature="e#3691#3782#0" expanded="false" />
+            <element signature="e#3844#3935#0" expanded="false" />
+            <element signature="e#3999#4091#0" expanded="false" />
+            <element signature="e#4154#5003#0" expanded="false" />
+            <element signature="e#5078#5203#0" expanded="false" />
+            <element signature="e#5287#6238#0" expanded="false" />
+            <element signature="e#12753#12957#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -600,17 +596,16 @@
           <caret line="22" column="31" lean-forward="false" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#3123#3313#0" expanded="false" />
-            <element signature="e#3376#3467#0" expanded="false" />
-            <element signature="e#3530#3621#0" expanded="false" />
-            <element signature="e#3684#3775#0" expanded="false" />
-            <element signature="e#3837#3928#0" expanded="false" />
-            <element signature="e#3992#4084#0" expanded="false" />
-            <element signature="e#4147#4996#0" expanded="false" />
-            <element signature="e#5071#5196#0" expanded="false" />
-            <element signature="e#5280#6231#0" expanded="false" />
-            <element signature="e#11870#11986#0" expanded="false" />
-            <element signature="e#12368#12572#0" expanded="false" />
+            <element signature="e#3130#3320#0" expanded="false" />
+            <element signature="e#3383#3474#0" expanded="false" />
+            <element signature="e#3537#3628#0" expanded="false" />
+            <element signature="e#3691#3782#0" expanded="false" />
+            <element signature="e#3844#3935#0" expanded="false" />
+            <element signature="e#3999#4091#0" expanded="false" />
+            <element signature="e#4154#5003#0" expanded="false" />
+            <element signature="e#5078#5203#0" expanded="false" />
+            <element signature="e#5287#6238#0" expanded="false" />
+            <element signature="e#12753#12957#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -767,17 +762,16 @@
           <caret line="22" column="31" lean-forward="false" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#3123#3313#0" expanded="false" />
-            <element signature="e#3376#3467#0" expanded="false" />
-            <element signature="e#3530#3621#0" expanded="false" />
-            <element signature="e#3684#3775#0" expanded="false" />
-            <element signature="e#3837#3928#0" expanded="false" />
-            <element signature="e#3992#4084#0" expanded="false" />
-            <element signature="e#4147#4996#0" expanded="false" />
-            <element signature="e#5071#5196#0" expanded="false" />
-            <element signature="e#5280#6231#0" expanded="false" />
-            <element signature="e#11870#11986#0" expanded="false" />
-            <element signature="e#12368#12572#0" expanded="false" />
+            <element signature="e#3130#3320#0" expanded="false" />
+            <element signature="e#3383#3474#0" expanded="false" />
+            <element signature="e#3537#3628#0" expanded="false" />
+            <element signature="e#3691#3782#0" expanded="false" />
+            <element signature="e#3844#3935#0" expanded="false" />
+            <element signature="e#3999#4091#0" expanded="false" />
+            <element signature="e#4154#5003#0" expanded="false" />
+            <element signature="e#5078#5203#0" expanded="false" />
+            <element signature="e#5287#6238#0" expanded="false" />
+            <element signature="e#12753#12957#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -903,7 +897,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Lex.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
+        <state relative-caret-position="3124">
           <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
           <folding />
         </state>
@@ -911,10 +905,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
+        <state relative-caret-position="2112">
           <caret line="54" column="40" lean-forward="false" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/derivatives.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1056">
+          <caret line="25" column="36" lean-forward="false" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
+          <folding>
+            <element signature="e#1#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -927,44 +931,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/derivative_solver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="34" column="50" lean-forward="false" selection-start-line="34" selection-start-column="50" selection-end-line="34" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#3130#3320#0" expanded="false" />
+            <element signature="e#3383#3474#0" expanded="false" />
+            <element signature="e#3537#3628#0" expanded="false" />
+            <element signature="e#3691#3782#0" expanded="false" />
+            <element signature="e#3844#3935#0" expanded="false" />
+            <element signature="e#3999#4091#0" expanded="false" />
+            <element signature="e#4154#5003#0" expanded="false" />
+            <element signature="e#5078#5203#0" expanded="false" />
+            <element signature="e#5287#6238#0" expanded="false" />
+            <element signature="e#12753#12957#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        <state relative-caret-position="616">
+          <caret line="30" column="19" lean-forward="false" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
             <element signature="e#162#253#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/derivatives.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="25" column="36" lean-forward="false" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
-          <folding>
-            <element signature="e#1#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/derivative_solver.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="199" column="34" lean-forward="false" selection-start-line="199" selection-start-column="34" selection-end-line="199" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#3123#3313#0" expanded="false" />
-            <element signature="e#3376#3467#0" expanded="false" />
-            <element signature="e#3530#3621#0" expanded="false" />
-            <element signature="e#3684#3775#0" expanded="false" />
-            <element signature="e#3837#3928#0" expanded="false" />
-            <element signature="e#3992#4084#0" expanded="false" />
-            <element signature="e#4147#4996#0" expanded="false" />
-            <element signature="e#5071#5196#0" expanded="false" />
-            <element signature="e#5280#6231#0" expanded="false" />
-            <element signature="e#11870#11986#0" expanded="false" />
-            <element signature="e#12368#12572#0" expanded="false" />
           </folding>
         </state>
       </provider>

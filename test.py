@@ -28,7 +28,7 @@ def simplifier():
 
 
 def derivative_solver():
-    data = "sin(x)"
+    data = "x^2 -7x - 6"
     solver = DerivativeSolver(data)
     res = solver.derivative()
     print(res)
