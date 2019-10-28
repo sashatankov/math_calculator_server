@@ -1,9 +1,10 @@
 from CompilationEngine import *
 from equation_solver import *
-
+from derivative_solver import *
 
 def main():
-    simplifier()
+    derivative_solver()
+
 
 def expression_solver():
     data = "2^(4+2)"
@@ -24,6 +25,14 @@ def simplifier():
     engine = EquationSolver(data)
     res = engine.simplify()
     print(res)
+
+
+def derivative_solver():
+    data = "sin(x)"
+    solver = DerivativeSolver(data)
+    res = solver.derivative()
+    print(res)
+
 
 if __name__ == '__main__':
     main()

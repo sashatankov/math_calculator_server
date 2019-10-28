@@ -1,27 +1,13 @@
 import re
 from CompilationError import *
 from enum import Enum
-import derivatives
-
-COEFF = 0
-FUNCTION_TYPE = 1
-DEGREE = 2
-INNER_FUNCTION = 3
-BASE = 2
-FIRST = 0
-SECOND = 1
+from derivatives import *
+from Lex import SUPERSCRIPT_SYMBOLS
+from Lex import SUBSCRIPT_SYMBOLS
+import math
 
 
-class Function(Enum):
-    POLY = 5
-    SIN = 6
-    COS = 7
-    TAN = 8
-    LOG = 9
-    EXP = 10
-    SQRT = 11
-    MULT = 12
-    DIV = 13
+
 
 constant_pattern = re.compile("(-)?\d+(\.\d+)?")  # f(x) = c function pattern
 one_degree_pattern = re.compile("(-)?(\d+(\.\d+)?)?(x|y|z)")  # f(x) = x function pattern
@@ -46,7 +32,7 @@ class DerivativeSolver:
         self._compile_exression()
 
     def derivative(self):
-        pass
+        return DerivativeSolver._to_string(self._differentiated_elements)
 
 
 # some private methods
@@ -139,7 +125,7 @@ class DerivativeSolver:
                 else:  # invalid expression
                     raise CompilationError("Invalid expression") 
 
-            return parsed
+        return parsed
 
     @staticmethod
     def _parse_term(func_type, term):
@@ -149,7 +135,7 @@ class DerivativeSolver:
         inner_func_str = DerivativeSolver._pad_with_pluses(inner_func_str)
         inner_func_tokenized = DerivativeSolver._tokenize(inner_func_str)
         inner_func_terms = DerivativeSolver._parse_terms(inner_func_tokenized)
-        coeff_str = term[:start_expr]
+        coeff_str = term[:term.find(derivatives_strings[func_type])]
         if not coeff_str:
             return 1, func_type, 1, inner_func_terms  #  we change the degree later, in parse terms func, where necessary
         elif coeff_str == "-":
@@ -177,12 +163,82 @@ class DerivativeSolver:
             return 1, Function.DIV, 1, [nominator_term, denominator_term]
 
         else:  # chain rule
-            outer_function_der = derivatives.derivatives[term[FUNCTION_TYPE]](term)
-            inner_function_der = DerivativeSolver._differentiate(term[INNER_FUNCTION])
-            return 1, Function.MULT, 1, [outer_function_der, inner_function_der]
+            outer_function_der = derivatives[term[FUNCTION_TYPE]](term)
+            if term[INNER_FUNCTION] is not None:
+                inner_function_der = list()
+                for term in term[INNER_FUNCTION]:
+                    inner_function_der.append(DerivativeSolver._differentiate(term[INNER_FUNCTION]))
+                return 1, Function.MULT, 1, [outer_function_der, inner_function_der]
+            return outer_function_der
 
-    def _group_elements(self):
-        pass
+    @staticmethod
+    def _group_elements(terms):
+
+        for i, term in enumerate(terms):
+            if term[FUNCTION_TYPE] == Function.MULT:
+                outer, inner = term[INNER_FUNCTION]
+                if inner[FUNCTION_TYPE] == Function.POLY and inner[DEGREE] == 0:
+                    terms[i] = (outer[COEFF] * inner[COEFF], outer[FUNCTION_TYPE], outer[DEGREE], outer[INNER_FUNCTION])
+                elif outer[FUNCTION_TYPE] == Function.POLY and outer[DEGREE] == 0:
+                    terms[i] = (inner[COEFF] * outer[COEFF], inner[FUNCTION_TYPE], inner[DEGREE], inner[INNER_FUNCTION])
+
+    @staticmethod
+    def _to_string(terms):
+        text = str()
+        for i, term in enumerate(terms):
+            if term[COEFF] == -1:
+                text += "-"
+            elif term[COEFF] == 0:
+                continue
+            elif term[COEFF] != 1:
+                if term[COEFF] > 0:
+                    text += "+"
+                text += str(term[COEFF])
+
+            if term[FUNCTION_TYPE] == Function.MULT:
+                outer, inner = term[INNER_FUNCTION]
+                if inner[FUNCTION_TYPE] == Function.POLY: # TODO bug here to fix
+                    text += "(" + DerivativeSolver._to_string(inner) + ")" + DerivativeSolver._to_string(outer)
+                else:
+                    text += DerivativeSolver._to_string(inner) + DerivativeSolver._to_string(outer)
+            elif term[FUNCTION_TYPE] == Function.DIV:
+                nominator, denominator = term[INNER_FUNCTION]
+                if nominator[FUNCTION_TYPE] == Function.POLY:
+                    text += "(" + DerivativeSolver._to_string(nominator) + ")"
+                else:  # no need for parentheses for non-polynomial function
+                    text += DerivativeSolver._to_string(nominator)
+                text += "/"
+                if denominator[FUNCTION_TYPE] == Function.POLY:
+                    text += "(" + DerivativeSolver._to_string(denominator) + ")"
+                else:  # no need for parentheses for non-polynomial function
+                    text += DerivativeSolver._to_string(denominator)
+            elif term[FUNCTION_TYPE] == Function.POLY:
+                if term[INNER_FUNCTION] is None:
+                    if term[DEGREE] > 0:
+                        text += "x"
+                    if term[DEGREE] > 1:
+                        text += "^" + str(term[DEGREE])
+                else:
+                    if term[DEGREE] > 0:
+                        text += "(" + DerivativeSolver._to_string(term[INNER_FUNCTION]) + ")"
+                    if term[DEGREE] > 1:
+                        text += "^" + str(term[DEGREE])
+            elif term[FUNCTION_TYPE] == Function.SIN:
+                text += "sin(" + DerivativeSolver._to_string(term[INNER_FUNCTION]) + ")"
+            elif term[FUNCTION_TYPE] == Function.COS:
+                text += "cos(" + DerivativeSolver._to_string(term[INNER_FUNCTION]) + ")"
+            elif term[FUNCTION_TYPE] == Function.TAN:
+                text += "tan(" + DerivativeSolver._to_string(term[INNER_FUNCTION]) + ")"
+            elif term[FUNCTION_TYPE] == Function.EXP:
+                if term[COEFF] != 1:
+                    text += "*"
+                text += "e^(" + str(term[INNER_FUNCTION]) + ")"
+            elif term[FUNCTION_TYPE] == Function.LOG:
+                text += "log(" + DerivativeSolver._to_string(term[INNER_FUNCTION]) + ")"
+            elif term[FUNCTION_TYPE] == Function.SQRT:
+                text += "\u221A" + "(" + DerivativeSolver._to_string(term[INNER_FUNCTION]) + ")"
+        return text
+
 
     @staticmethod
     def _pad_with_pluses(expression):
