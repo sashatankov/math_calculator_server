@@ -4,6 +4,7 @@ from flask import request
 from flask import jsonify
 from CompilationEngine import *
 from equation_solver import *
+from derivative_solver import *
 from flask_cors import CORS, cross_origin
 
 
@@ -61,6 +62,22 @@ def simplify():
     finally:
         return jsonify(result=res)
 
+
+@app.route("/derivative", methods=["POST", "METHODS"])
+@cross_origin("*")
+def derivative():
+    data = request.json["expression"]
+    print(data)
+    res = str()
+    try:
+        solver = DerivativeSolver(data)
+        der = solver.derivative()
+        res = der
+        print(res)
+    except CompilationError:
+        res = "Invalid Expression"
+    finally:
+        return jsonify(result=res)
 
 if __name__ == '__main__':
     app.run(debug=True)
