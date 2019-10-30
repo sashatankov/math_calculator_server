@@ -8,9 +8,13 @@ from derivative_solver import *
 from flask_cors import CORS, cross_origin
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="build/static", template_folder="build")
 CORS(app)
 
+
+@app.route("/")
+def main():
+    return render_template("index.html")
 
 @app.route("/evaluate", methods=["POST", "OPTIONS"])
 @cross_origin(origin="*")
