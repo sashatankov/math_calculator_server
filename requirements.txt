@@ -1,5 +1,4 @@
 absl-py==0.7.1
-apturl==0.5.2
 astor==0.7.1
 beautifulsoup4==4.4.1
 blinker==1.3
