@@ -28,7 +28,7 @@ def simplifier():
 
 
 def derivative_solver():
-    data = "x^2 -7x - 6"
+    data = "1/x"
     solver = DerivativeSolver(data)
     res = solver.derivative()
     print(res)

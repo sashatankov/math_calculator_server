@@ -9,17 +9,17 @@ import math
 
 
 
-constant_pattern = re.compile("(-)?\d+(\.\d+)?")  # f(x) = c function pattern
-one_degree_pattern = re.compile("(-)?(\d+(\.\d+)?)?(x|y|z)")  # f(x) = x function pattern
-one_degree_expr_pattern = re.compile("(-)?(\d+(\.\d+)?)?\(.+\)")  # f(x) = c * g(x)
-n_degree_pattern = re.compile("(-)?(\d+(\.\d+)?)?(x|y|z)\^(\d+(\.\d+)?)")  # f(x) = c * x^n function pattern
-n_degree_expr_pattern = re.compile("(-)?(\d+(\.\d+)?)?\(.+\)\^(\d+(\.\d+)?)")  # f(x) = c * g(x)^n
-sin_pattern = re.compile("(-)?(\d+(\.\d+)?)?sin\(.+\)")  # f(x) = c*sin(g(x)) function pattern
-cos_pattern = re.compile("(-)?(\d+(\.\d+)?)?cos\(.+\)")  # f(x) = c*cos(g(x)) function pattern
-tan_pattern = re.compile("(-)?(\d+(\.\d+)?)?tan\(.+\)")  # f(x) = c*tan(g(x)) function pattern
-ln_pattern = re.compile("(-)?(\d+(\.\d+)?)?(ln|log)\(.+\)")  # f(x) = c*ln(g(x)) function pattern
-exp_pattern = re.compile("(-)?(\d+(\.\d+)?)?\*(-)?((\d+(\.\d+)?)|e)\^\(.+\)")  # f(x) = c*a^(g(x))
-sqrt_pattern = re.compile("(-)?(\d+(\.\d+)?)?sqrt\(.+\)")  # f(x) = c*sqrt(g(x))
+constant_pattern = re.compile("^(-)?\d+(\.\d+)?$")  # f(x) = c function pattern
+one_degree_pattern = re.compile("^(-)?(\d+(\.\d+)?)?(x|y|z)$")  # f(x) = x function pattern
+one_degree_expr_pattern = re.compile("^(-)?(\d+(\.\d+)?)?\(.+\)$")  # f(x) = c * g(x)
+n_degree_pattern = re.compile("^(-)?(\d+(\.\d+)?)?(x|y|z)\^(\d+(\.\d+)?)$")  # f(x) = c * x^n function pattern
+n_degree_expr_pattern = re.compile("^(-)?(\d+(\.\d+)?)?\(.+\)\^(\d+(\.\d+)?)$")  # f(x) = c * g(x)^n
+sin_pattern = re.compile("^(-)?(\d+(\.\d+)?)?sin\(.+\)$")  # f(x) = c*sin(g(x)) function pattern
+cos_pattern = re.compile("^(-)?(\d+(\.\d+)?)?cos\(.+\)$")  # f(x) = c*cos(g(x)) function pattern
+tan_pattern = re.compile("^(-)?(\d+(\.\d+)?)?tan\(.+\)$")  # f(x) = c*tan(g(x)) function pattern
+ln_pattern = re.compile("^(-)?(\d+(\.\d+)?)?(ln|log)\(.+\)$")  # f(x) = c*ln(g(x)) function pattern
+exp_pattern = re.compile("^(-)?(\d+(\.\d+)?)?\*(-)?((\d+(\.\d+)?)|e)\^\(.+\)$")  # f(x) = c*a^(g(x))
+sqrt_pattern = re.compile("^(-)?(\d+(\.\d+)?)?sqrt\(.+\)$")  # f(x) = c*sqrt(g(x))
 
 
 class DerivativeSolver:
@@ -71,7 +71,7 @@ class DerivativeSolver:
             elif n_degree_expr_pattern.fullmatch(term):
                 item = DerivativeSolver._parse_term(Function.POLY, term)
                 deg_str = term[term.find("^") + 1:]
-                item[DEGREE] = float(deg_str)
+                item = (item[COEFF], item[FUNCTION_TYPE], float(deg_str), item[INNER_FUNCTION])
                 parsed.append(item)
             elif sin_pattern.fullmatch(term):
                 item = DerivativeSolver._parse_term(Function.SIN, term)
@@ -107,7 +107,7 @@ class DerivativeSolver:
                     return parsed.append((float(coeff_str), Function.EXP, float(base_str), inner_func_str))
             elif one_degree_expr_pattern.fullmatch(term):
                 item = DerivativeSolver._parse_term(Function.POLY, term)
-                item[DEGREE] = 1
+                item = (item[COEFF], item[FUNCTION_TYPE], 1, item[INNER_FUNCTION])
                 parsed.append(item)
             else:  # product of functions or quotient of functions
                 find_div = term.find("/")
@@ -132,10 +132,12 @@ class DerivativeSolver:
         start_expr = term.find("(")
         end_expr = term.find(")")
         inner_func_str = term[start_expr + 1: end_expr].strip()
-        inner_func_str = DerivativeSolver._pad_with_pluses(inner_func_str)
         inner_func_tokenized = DerivativeSolver._tokenize(inner_func_str)
         inner_func_terms = DerivativeSolver._parse_terms(inner_func_tokenized)
-        coeff_str = term[:term.find(derivatives_strings[func_type])]
+        if func_type == Function.POLY:
+            coeff_str = term[:start_expr]
+        else:  # sin, cos, sqrt, exp, tan
+            coeff_str = term[:term.find(derivatives_strings[func_type])]
         if not coeff_str:
             return 1, func_type, 1, inner_func_terms  #  we change the degree later, in parse terms func, where necessary
         elif coeff_str == "-":
@@ -204,15 +206,15 @@ class DerivativeSolver:
 
         if term[FUNCTION_TYPE] == Function.MULT:
             outer, inner = term[INNER_FUNCTION]
-            if len(inner) > 1:  # case where there's more than one term in the inner function
-                text += "(" + DerivativeSolver._print_expression(inner) + ")"
-            else:
-                text += DerivativeSolver._print_expression(inner)
-
             if type(outer) is tuple:
                 text += DerivativeSolver._print_term(outer)
             else:  # outer is a list
                 text += DerivativeSolver._print_expression(outer)
+
+            if len(inner) > 1:  # case where there's more than one term in the inner function
+                text += "(" + DerivativeSolver._print_expression(inner) + ")"
+            else:
+                text += DerivativeSolver._print_expression(inner)
 
         elif term[FUNCTION_TYPE] == Function.DIV:
             nominator, denominator = term[INNER_FUNCTION]
@@ -275,7 +277,8 @@ class DerivativeSolver:
             elif symbol == ")":
                 stack.pop()
             elif symbol == "+" and (not stack):
-                elements.append(expression[start: i].strip())
+                if expression[start: i].strip():
+                    elements.append(expression[start: i].strip())
                 start = i + 1
 
         if not stack:

@@ -65,7 +65,7 @@ derivatives = {
 }
 derivatives_strings = {
     Function.SQRT: "sqrt",
-    Function.EXP: "e",
+    Function.EXP: "*",  # this is done because the coeff comes before the * sign, before the base of EXP
     Function.LOG: "log",
     Function.SIN: "sin",
     Function.COS: "cos",
